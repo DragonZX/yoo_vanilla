@@ -1,6 +1,6 @@
-#Шаблон для joomla 2.5.  
-Название - [yoo_vanilla](http://www.yootheme.com/demo/joomla/vanilla).  
-Автор - [yoo theme](http://www.yootheme.com/)  
-Vanilla - тема выпущенная в феврале 2011 клубом YooTheme. Она базируется на [Warp Framework](http://www.yootheme.com/themes/warp-framework).  
-- Версия шаблона:5.5.17.  
-- Версия Warp Framework:6.3.0.
+#РЁР°Р±Р»РѕРЅ РґР»СЏ joomla 2.5.  
+РќР°Р·РІР°РЅРёРµ - [yoo_vanilla](http://www.yootheme.com/demo/joomla/vanilla).  
+РђРІС‚РѕСЂ - [yoo theme](http://www.yootheme.com/)  
+Vanilla - С‚РµРјР° РІС‹РїСѓС‰РµРЅРЅР°СЏ РІ С„РµРІСЂР°Р»Рµ 2011 РєР»СѓР±РѕРј YooTheme. РћРЅР° Р±Р°Р·РёСЂСѓРµС‚СЃСЏ РЅР° [Warp Framework](http://www.yootheme.com/themes/warp-framework).  
+- Р’РµСЂСЃРёСЏ С€Р°Р±Р»РѕРЅР°:5.5.17.  
+- Р’РµСЂСЃРёСЏ Warp Framework:6.3.0.
