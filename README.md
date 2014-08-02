@@ -13,5 +13,5 @@ Vanilla - тема выпущенная в феврале 2011 клубом YooT
   - right  
   - contentleft  
   - contentright  
-  - content1..9 
+  - content1..9  
 3.Проверить все модули и компоненты на работоспособность.   
