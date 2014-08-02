@@ -7,9 +7,9 @@
 */
 
 // init vars
-$config = $this->warp->getHelper('config');
+$config = $this['config'];
 $style  = $config->get('style');
-$bgcolor  = $config->get('bgcolor');
+$bgcolor  = $config->get('background');
 $color  = $config->get('color');
 		
 // set template css
@@ -60,8 +60,8 @@ if ($config->get('direction') == 'rtl') {
 	$this->warp->stylesheets->add('css:rtl.css');
 }
 	
-$this['asset']->addFile('css', "css:styles/{$style}-{$bgcolor}.css");
-$this['asset']->addFile('css', "css:styles/color-{$color}.css");
+$this['asset']->addFile('css', "css:styles/$style-$bgcolor.css");
+$this['asset']->addFile('css', "css:styles/color-$color.css");
 $this['asset']->addFile('css', "css:styles/{$style}.css");
 $this['asset']->addFile('css', 'css:custom.css');
 

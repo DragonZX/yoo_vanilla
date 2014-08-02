@@ -53,11 +53,10 @@ class SystemWarpHelper extends WarpHelper {
         $this->url         = rtrim(JURI::root(false), '/');
         $this->cache_path  = $this->path.'/cache/template';
         $this->cache_time  = max(JFactory::getConfig()->get('cachetime') * 60, 86400);
-
+		
 		// set config or load defaults
 		$file = $this['path']->path('template:config');
 		$this->config = $this['data']->create(file_get_contents($file ? $file : $this['path']->path('template:config.default')));
-
 		// set cache directory
 		if (!file_exists($this->cache_path)) {
 			JFolder::create($this->cache_path);

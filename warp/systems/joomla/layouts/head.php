@@ -18,11 +18,8 @@ unset($head['metaTags']['standard']['language']);
 
 $this['system']->document->setHeadData($head);
 
-// load jQuery, if not loaded before
-if (!$this['system']->application->get('jquery')) {
-	$this['system']->application->set('jquery', true);
-	$this['system']->document->addScript($this['path']->url('lib:jquery/jquery.js'));
-}
+// load jQuery
+JHtml::_('jquery.framework');
 
 // get styles and scripts
 $styles  = $this['asset']->get('css');

@@ -15,7 +15,7 @@
 		$('a[href="#page"]').smoothScroller({ duration: 500 });
 
 		/* Spotlight */
-		$('.warpspotlight').warpspotlight({ fade: 300 });
+		$('.warpspotlight').spotlight({ fade: 300 });
 
 		var matchHeight = function(selector, deepest) {
 			
