@@ -143,8 +143,31 @@ switch ($style) {
 }
 
 // render menu template
-if ($params['menu']) {
-	$content = $this->warp->menu->process($module,array('pre','default',$params['menu'],'post'));
+if ($module->menu) {
+	
+	// set menu renderer
+	if (isset($params['menu'])) {
+		$renderer = $params['menu'];
+	} else if (in_array($module->position, array('menu'))) {
+		$renderer = 'dropdown';
+	} else if (in_array($module->position, array('toolbar-l', 'toolbar-r', 'footer'))) {
+		$renderer = 'default';
+	} else {
+		$renderer = 'accordion';
+	}
+	
+	// set menu style
+	if ($renderer == 'dropdown') {
+		$module->menu_style = 'menu-dropdown';
+	} else if ($renderer == 'accordion') {
+		$module->menu_style = 'menu-sidebar';
+	} else if ($renderer == 'default') {
+		$module->menu_style = 'menu-line';
+	} else {
+		$module->menu_style = null;
+	}
+	
+	$content = $this['menu']->process($module,array_unique(array('pre','default',$renderer,'post')));
 }
 
 // render module template

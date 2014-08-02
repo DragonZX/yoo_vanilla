@@ -23,7 +23,7 @@ if ($this['modules']->count('left')) {
 }
 
 if ($this['modules']->count('right')) {
-	if (!$this->warp->modules->count('left'))  { $config->set('left_width', '0'); }
+	if (!$this['modules']->count('left'))  { $config->set('left_width', '0'); }
 	$css .= '#main-shift { margin-right: '.(intval($config->get('right_width')) + intval($config->get('right_space')))."px; }\n";
 	$css .= '#right { width: '.intval($config->get('right_width')).'px; margin-left: -'.(intval($config->get('left_width')) + intval($config->get('right_width')))."px; }\n";
 }
@@ -35,7 +35,7 @@ if ($this['modules']->count('contentleft')) {
 }		
 
 if ($this['modules']->count('contentright')) {
-	if (!$this->warp->modules->count('contentleft')) { $config->set('contentleft_width', '0'); }
+	if (!$this['modules']->count('contentleft')) { $config->set('contentleft_width', '0'); }
 	$css .= '#content-shift { margin-right: '.(intval($config->get('contentright_width')) + intval($config->get('contentright_space')))."px; }\n";
 	$css .= '#contentright { width: '.intval($config->get('contentright_width')).'px; margin-left: -'.(intval($config->get('contentleft_width')) + intval($config->get('contentright_width')))."px; }\n";
 }
