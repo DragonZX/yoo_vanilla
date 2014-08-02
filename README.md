@@ -7,11 +7,11 @@ Vanilla - тема выпущенная в феврале 2011 клубом YooT
 ##TODO  
 1. Упорядочить configs(config.default,config.xml,templateDetails.xml,config.php).  
 2. Починить позиции(в этих позициях не отображаются модули)  
-- search  
-- banner  
-- left  
-- right  
-- contentleft  
-- contentright  
-- content1..9 
+  - search  
+  - banner  
+  - left  
+  - right  
+  - contentleft  
+  - contentright  
+  - content1..9 
 3.Проверить все модули и компоненты на работоспособность.   
