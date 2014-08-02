@@ -5,8 +5,9 @@ Vanilla - тема выпущенная в феврале 2011 клубом YooT
 - Версия шаблона:5.5.17.  
 - Версия Warp Framework:6.3.0.  
 **TODO  
-1. Упорядочить configs(config.default,config.xml,templateDetails.xml,config.php).  
-2. Починить позиции(в этих позициях не отображаются модули)  
+- [ ] Упорядочить configs(config.default,config.xml,templateDetails.xml,config.php).  
+
+- [ ] Починить позиции(в этих позициях не отображаются модули)  
   - search  
   - banner  
   - left  
@@ -14,4 +15,5 @@ Vanilla - тема выпущенная в феврале 2011 клубом YooT
   - contentleft  
   - contentright  
   - content1..9  
-3. Проверить все модули и компоненты на работоспособность.   
+
+- Проверить все модули и компоненты на работоспособность.   
