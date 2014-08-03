@@ -157,4 +157,4 @@ $params = &$this->item->params;
 	<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
 	<input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
 </form>
-<?php endif;
+<?php endif; ?>

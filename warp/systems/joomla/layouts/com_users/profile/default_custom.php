@@ -7,7 +7,7 @@
 */
 
 // no direct access
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access');
 
 $fieldsets = $this->form->getFieldsets();
 if (isset($fieldsets['core']))   unset($fieldsets['core']);
@@ -21,29 +21,26 @@ JHtml::register('users.spacer', array('JHtmlUsers', 'spacer'));
 <?php foreach ($fieldsets as $group => $fieldset): ?>
 	<?php $fields = $this->form->getFieldset($fieldset->name); ?>
 	<?php if (count($fields)): ?>
-
-		<?php if (isset($fieldset->label)): ?>
-		<h3><?php echo JText::_($fieldset->label); ?></h3>
-		<?php endif;?>
-		
-		<ul>
-		<?php foreach ($fields as $field): ?>
-			<?php if (!$field->hidden): ?>
-			<li>
-				<strong><?php echo $field->title; ?>:</strong>
-				<?php if (JHtml::isRegistered('users.'.$field->id)):?>
-					<?php echo JHtml::_('users.'.$field->id, $field->value);?>
-				<?php elseif (JHtml::isRegistered('users.'.$field->fieldname)):?>
-					<?php echo JHtml::_('users.'.$field->fieldname, $field->value);?>
-				<?php elseif (JHtml::isRegistered('users.'.$field->type)):?>
-					<?php echo JHtml::_('users.'.$field->type, $field->value);?>
-				<?php else:?>
-					<?php echo JHtml::_('users.value', $field->value);?>
-				<?php endif;?>
-			</li>
-			<?php endif; ?>
-		<?php endforeach; ?>
-		</ul>
-
+		<fieldset>
+			<?php if (isset($fieldset->label)): ?>
+			<legend><?php echo JText::_($fieldset->label); ?></legend>
+			<?php endif;?>
+			<?php foreach ($fields as $field): ?>
+				<?php if (!$field->hidden): ?>
+				<div>
+					<?php echo $field->title; ?>
+					<?php if (JHtml::isRegistered('users.'.$field->id)):?>
+						<?php echo JHtml::_('users.'.$field->id, $field->value);?>
+					<?php elseif (JHtml::isRegistered('users.'.$field->fieldname)):?>
+						<?php echo JHtml::_('users.'.$field->fieldname, $field->value);?>
+					<?php elseif (JHtml::isRegistered('users.'.$field->type)):?>
+						<?php echo JHtml::_('users.'.$field->type, $field->value);?>
+					<?php else:?>
+						<?php echo JHtml::_('users.value', $field->value);?>
+					<?php endif;?>
+				</div>
+				<?php endif; ?>
+			<?php endforeach; ?>
+		</fieldset>
 	<?php endif; ?>
-<?php endforeach;
+<?php endforeach; ?>

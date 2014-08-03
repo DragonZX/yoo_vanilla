@@ -13,7 +13,7 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 
 ?>
 
-<div id="system">
+<div id="system" class="<?php $this->pageclass_sfx; ?>">
 
 	<?php if ($this->params->get('show_page_heading', 1)) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
@@ -22,13 +22,17 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 	<?php
 	
 	// init vars
+	$leading = '';
 	$articles = '';
 	
 	// leading articles
+	$leading .= '<div class="items leading">';
 	foreach ($this->lead_items as $item) {
 		$this->item = $item;
-		$articles  .= '<div class="grid-box width100 leading">'.$this->loadTemplate('item').'</div>';
+		$leading  .= $this->loadTemplate('item');
 	}
+	$leading .= '</div>';
+	echo $leading;
 	
 	// intro articles
 	$columns = array();
@@ -48,14 +52,16 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 	// render intro columns
 	if ($count = count($columns)) {
 		for ($i = 0; $i < $count; $i++) {
-			$articles .= '<div class="grid-box width'.intval(100 / $count).'">'.$columns[$i].'</div>';
+			$first = ($i == 0) ? ' first' : null;
+			$last  = ($i == $count - 1) ? ' last' : null;
+			$articles .= '<div class="width'.intval(100 / $count).$first.$last.'">'.$columns[$i].'</div>';
 		}
 	}
 
 	if ($articles) {
-		echo '<div class="items items-col-'.$count.' grid-block">'.$articles.'</div>';
+		echo '<div class="items items-col-'.$count.'">'.$articles.'</div>';
 	}
-
+	
 	?>
 
 	<?php if (!empty($this->link_items)) : ?>
@@ -76,3 +82,4 @@ JHtml::addIncludePath(JPATH_COMPONENT . '/helpers');
 	<?php endif; ?>
 
 </div>
+

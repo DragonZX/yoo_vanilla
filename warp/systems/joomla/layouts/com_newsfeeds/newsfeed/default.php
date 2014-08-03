@@ -13,8 +13,8 @@ defined('_JEXEC') or die;
 
 <div id="system">
 
-	<?php if ($this->params->get('show_page_heading')) : ?>
-	<h1 class="page-title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
+	<?php if ($this->params->get('show_page_heading', 1)) : ?>
+	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 
 	<h1 class="title"><a href="<?php echo $this->newsfeed->channel['link']; ?>" target="_blank"><?php echo str_replace('&apos;', "'", $this->newsfeed->channel['title']); ?></a></h1>
@@ -39,7 +39,7 @@ defined('_JEXEC') or die;
 			<?php if ($this->params->get('show_item_description') && $item->get_description()) : ?>
 				<?php
 					$text = $item->get_description();
-					if ($this->params->get('show_feed_image', 0) == 0) {
+					if($this->params->get('show_feed_image', 0) == 0) {
 						$text = JFilterOutput::stripImages($text);
 					}
 					$text = JHtml::_('string.truncate', $text, $this->params->get('feed_character_count'));

@@ -7,20 +7,20 @@
 */
 
 // no direct access
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access');
 
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
 
-<div id="system">
+<div id="system" class="<?php $this->pageclass_sfx; ?>">
 	
 	<?php if ($this->params->get('show_page_heading')) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 
-	<form class="submission small style" action="<?php echo JRoute::_('index.php?option=com_users&task=reset.request'); ?>" method="post">
+	<form action="<?php echo JRoute::_('index.php?option=com_users&task=reset.request'); ?>" method="post" class="submission">
 		<?php foreach ($this->form->getFieldsets() as $fieldset): ?>
 		<p><?php echo JText::_($fieldset->label); ?></p>
 		<fieldset>
@@ -30,7 +30,7 @@ JHtml::_('behavior.formvalidation');
 		</fieldset>
 		<?php endforeach; ?>
 
-		<div>
+		<div class="submit">
 			<button type="submit"><?php echo JText::_('JSUBMIT'); ?></button>
 		</div>
 

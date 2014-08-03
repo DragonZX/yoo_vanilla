@@ -11,11 +11,12 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 
+$pageClass = $this->params->get('pageclass_sfx');
 ?>
 
-<div id="system">
+<div id="system" class="<?php $this->pageclass_sfx; ?>">
 
-	<?php if ($this->params->get('show_page_heading')) : ?>
+	<?php if ($this->params->get('show_page_heading', 1)) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 
@@ -30,7 +31,7 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 	<?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) :?>
 	<div class="description">
 		<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
-			<img src="<?php echo $this->category->getParams()->get('image'); ?>" alt="<?php echo $this->category->getParams()->get('image'); ?>" class="size-auto align-right" />
+			<img src="<?php echo $this->category->getParams()->get('image'); ?>" alt="<?php echo $this->category->getParams()->get('image'); ?>" class="align-right" />
 		<?php endif; ?>
 		<?php if ($this->params->get('show_description') && $this->category->description) echo JHtml::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
 	</div>
@@ -39,13 +40,17 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 	<?php
 	
 	// init vars
+	$leading = '';
 	$articles = '';
 	
 	// leading articles
+	$leading .= '<div class="items leading">';
 	foreach ($this->lead_items as $item) {
 		$this->item = $item;
-		$articles  .= '<div class="grid-box width100 leading">'.$this->loadTemplate('item').'</div>';
+		$leading  .= $this->loadTemplate('item');
 	}
+	$leading .= '</div>';
+	echo $leading;
 	
 	// intro articles
 	$columns = array();
@@ -65,12 +70,14 @@ JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 	// render intro columns
 	if ($count = count($columns)) {
 		for ($i = 0; $i < $count; $i++) {
-			$articles .= '<div class="grid-box width'.intval(100 / $count).'">'.$columns[$i].'</div>';
+			$first = ($i == 0) ? ' first' : null;
+			$last  = ($i == $count - 1) ? ' last' : null;
+			$articles .= '<div class="width'.intval(100 / $count).$first.$last.'">'.$columns[$i].'</div>';
 		}
 	}
 
 	if ($articles) {
-		echo '<div class="items items-col-'.$count.' grid-block">'.$articles.'</div>';
+		echo '<div class="items items-col-'.$count.'">'.$articles.'</div>';
 	}
 	
 	?>

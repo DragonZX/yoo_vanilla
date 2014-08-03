@@ -14,7 +14,7 @@ $cparams = JComponentHelper::getParams ('com_media');
 
 <div id="system">
 
-	<?php if ($this->params->get('show_page_heading')) : ?>
+	<?php if ($this->params->get('show_page_heading', 1)) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 
@@ -37,7 +37,7 @@ $cparams = JComponentHelper::getParams ('com_media');
 	<div class="item">
 	
 		<?php if ($this->contact->name && $this->params->get('show_name')) : ?>
-		<h1 class="title"><?php echo $this->contact->name; ?></h1>
+		<h1 class="title"><?php echo $this->contact->name; ?></h2>
 		<?php endif;  ?>
 		
 		<?php if ($this->contact->con_position && $this->params->get('show_position')) : ?>

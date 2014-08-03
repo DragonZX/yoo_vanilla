@@ -7,7 +7,7 @@
 */
 
 // no direct access
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access');
 
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
@@ -18,13 +18,13 @@ $lang = JFactory::getLanguage();
 $lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR);
 ?>
 
-<div id="system">
+<div id="system" class="<?php $this->pageclass_sfx; ?>">
 	
 	<?php if ($this->params->get('show_page_heading')) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 
-	<form class="submission box style" action="<?php echo JRoute::_('index.php?option=com_users&task=profile.save'); ?>" method="post" enctype="multipart/form-data">
+	<form action="<?php echo JRoute::_('index.php?option=com_users&task=profile.save'); ?>" method="post" class="submission" enctype="multipart/form-data">
 		<?php foreach ($this->form->getFieldsets() as $fieldset): ?>
 			<?php $fields = $this->form->getFieldset($fieldset->name); ?>
 			<?php if (count($fields)): ?>
@@ -37,7 +37,7 @@ $lang->load( 'plg_user_profile', JPATH_ADMINISTRATOR);
 							<?php echo $field->input; ?>
 						<?php else: ?>
 							<div><?php echo $field->label.$field->input; ?>
-								<?php if (!$field->required && $field->type!='Spacer' && $field->name!='jform[username]'): ?>
+								<?php if (!$field->required && $field->type!='Spacer'): ?>
 									<span class="optional"><?php echo JText::_('COM_USERS_OPTIONAL');?></span>
 								<?php endif; ?>
 							</div>

@@ -7,32 +7,35 @@
 */
 
 // no direct access
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access');
 
+JHtml::_('behavior.mootools');
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
 ?>
 
-<div id="system">
+<div id="system" class="<?php $this->pageclass_sfx; ?>">
 	
 	<?php if ($this->params->get('show_page_heading')) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 
-	<form class="submission small style" action="<?php echo JRoute::_('index.php?option=com_users&task=registration.register'); ?>" method="post">
+	<form action="<?php echo JRoute::_('index.php?option=com_users&task=registration.register'); ?>" method="post" class="submission">
 		<?php foreach ($this->form->getFieldsets() as $fieldset): ?>
 			<?php $fields = $this->form->getFieldset($fieldset->name); ?>
 			<?php if (count($fields)): ?>
 				<fieldset>
+					<?php if (isset($fieldset->label)): ?>
+					<legend><?php echo JText::_($fieldset->label); ?></legend>
+					<?php endif;?>
 					<?php foreach ($fields as $field): ?>
 						<?php if ($field->hidden): ?>
 							<?php echo $field->input; ?>
 						<?php else: ?>
-							<div><?php echo $field->label; ?>
-								<?php echo ($field->type!='Spacer') ? $field->input : "&#160;"; ?>
+							<div><?php echo $field->label.$field->input; ?>
 								<?php if (!$field->required && $field->type != 'Spacer'): ?>
-									<span class="optional"><?php echo JText::_('COM_USERS_OPTIONAL'); ?></span>
+									<span class="optional"><?php echo JText::_('COM_USERS_OPTIONAL');?></span>
 								<?php endif; ?>
 							</div>
 					<?php endif; ?>
@@ -41,7 +44,7 @@ JHtml::_('behavior.formvalidation');
 			<?php endif; ?>
 		<?php endforeach; ?>
 
-		<div>
+		<div class="submit">
 			<button class="validate" type="submit"><?php echo JText::_('JREGISTER'); ?></button>
 		</div>
 		

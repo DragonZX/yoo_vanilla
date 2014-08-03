@@ -32,11 +32,11 @@ $params = $this->state->get('params');
 
 <div id="system">
 	
-	<?php if ($this->params->get('show_page_heading')) : ?>
+	<?php if ($this->params->get('show_page_heading', 1)) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 	
-	<form class="submission box style" action="<?php echo JRoute::_('index.php?option=com_weblinks&view=form&w_id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm">
+	<form class="submission" action="<?php echo JRoute::_('index.php?option=com_weblinks&view=form&w_id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm">
 		<fieldset>
 			<legend><?php echo JText::_('COM_WEBLINKS_LINK'); ?></legend>
 	
@@ -79,7 +79,7 @@ $params = $this->state->get('params');
 				
 		</fieldset>
 		
-		<div>
+		<div class="submit">
 			<button type="button" onclick="Joomla.submitbutton('weblink.save')"><?php echo JText::_('JSAVE') ?></button>
 			<button type="button" onclick="Joomla.submitbutton('weblink.cancel')"><?php echo JText::_('JCANCEL') ?></button>
 		</div>

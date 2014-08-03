@@ -7,10 +7,10 @@
 */
 
 // no direct access
-defined('_JEXEC') or die;
+defined('_JEXEC') or die('Restricted access');
 ?>
 
-<div id="system">
+<div id="system" class="<?php echo $this->pageclass_sfx; ?>">
 	
 	<?php if ($this->params->get('show_page_heading')) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
@@ -19,13 +19,13 @@ defined('_JEXEC') or die;
 	<?php if (($this->params->get('logoutdescription_show') == 1 && str_replace(' ', '', $this->params->get('logout_description')) != '')|| $this->params->get('logout_image') != '') : ?>
 	<div class="description">
 		<?php if ($this->params->get('logout_image')) : ?>
-			<img src="<?php $this->escape($this->params->get('logout_image')); ?>" alt="<?php echo JText::_('COM_USER_LOGOUT_IMAGE_ALT')?>" class="size-auto" />
+			<img src="<?php $this->escape($this->params->get('logout_image')); ?>" alt="<?php echo JText::_('COM_USER_LOGOUT_IMAGE_ALT')?>" />
 		<?php endif; ?>
 		<?php if ($this->params->get('logoutdescription_show')) echo $this->params->get('logout_description'); ?>
 	</div>
 	<?php endif; ?>
 
-	<form class="submission small style" action="<?php echo JRoute::_('index.php?option=com_users&task=user.logout'); ?>" method="post">
+	<form action="<?php echo JRoute::_('index.php?option=com_users&task=user.logout'); ?>" method="post" class="submission">
 		<button type="submit" class="button"><?php echo JText::_('JLOGOUT'); ?></button>
 		<input type="hidden" name="return" value="<?php echo base64_encode($this->params->get('logout_redirect_url', $this->form->getValue('return'))); ?>" />
 		<?php echo JHtml::_('form.token'); ?>

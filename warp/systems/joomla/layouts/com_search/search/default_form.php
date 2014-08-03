@@ -7,14 +7,14 @@
 */
 
 // no direct access
-defined('_JEXEC') or die; 
+defined('_JEXEC') or die('Restricted access'); 
 
 $lang = JFactory::getLanguage();
 $upper_limit = $lang->getUpperLimitSearchWord();
 
 ?>
 
-<form class="box style" id="searchForm" action="<?php echo JRoute::_('index.php?option=com_search');?>" method="post" name="searchForm">
+<form id="searchForm" action="<?php echo JRoute::_('index.php?option=com_search');?>" method="post" name="searchForm">
 
 	<fieldset>
 		<legend><?php echo JText::_('COM_SEARCH_SEARCH'); ?></legend>
