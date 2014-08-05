@@ -8,9 +8,11 @@
 
 // init vars
 $config = $this['config'];
-$style  = $config->get('style');
+$style  = $config->get('profile_default');
 $bgcolor  = $config->get('background');
-$color  = $config->get('color');
+$color  = $this['config']->get('color');
+
+
 		
 // set template css
 $css = 'body { min-width: '.intval($config->get('template_width')).$config->get('template_width_unit')."; }\n";
@@ -62,7 +64,7 @@ if ($config->get('direction') == 'rtl') {
 	
 $this['asset']->addFile('css', "css:styles/$style-$bgcolor.css");
 $this['asset']->addFile('css', "css:styles/color-$color.css");
-$this['asset']->addFile('css', "css:styles/{$style}.css");
+$this['asset']->addFile('css', "css:styles/$style.css");
 $this['asset']->addFile('css', 'css:custom.css');
 
 // set google fonts

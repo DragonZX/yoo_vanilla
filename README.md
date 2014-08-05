@@ -7,7 +7,7 @@ Vanilla - тема выпущенная в феврале 2011 клубом YooT
 
 ## TODO  
 
-- [ ] Упорядочить configs(config.default,config.xml,templateDetails.xml,config.php).  
+- [x] Упорядочить configs(config.default,config.xml,templateDetails.xml,config.php).  
 
 - [ ] Починить позиции(в этих позициях не отображаются модули)  
   - search  
