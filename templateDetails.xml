@@ -21,6 +21,7 @@
 		<filename>raw.php</filename>
 		<filename>error.php</filename>
 		<filename>config.default</filename>
+		<filename>config</filename>
 		<filename>template_preview.png</filename>
 		<filename>template_thumbnail.png</filename>
 		<filename>templateDetails.xml</filename>
