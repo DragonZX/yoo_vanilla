@@ -20,4 +20,4 @@ defined('_JEXEC') or die;
 		</li>
 		<?php endfor; ?>
 	</ul>
-<?php endif; ?>
+<?php endif;

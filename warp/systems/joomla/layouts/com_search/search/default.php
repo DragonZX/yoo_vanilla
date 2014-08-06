@@ -9,14 +9,17 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
-if (JRequest::getWord('type', '') == 'json' && JRequest::getWord('tmpl', '') == 'raw') :
+// get application
+$app = JFactory::getApplication();
+
+if ($app->input->getWord('type', '') == 'json' && $app->input->getWord('tmpl', '') == 'raw') :
 
 	// set defaults
 	$res_limit  = 6;		
 	$char_limit = 100;		
 
-	// get request var
-	$search = JRequest::getString('searchword', '');
+	// get search
+	$search = $app->input->getString('searchword', '');
 	$search = JString::strtolower($search);
 
 	// search results
@@ -45,9 +48,9 @@ else :
 
 ?>
 
-<div id="system" class="<?php echo $this->pageclass_sfx; ?>">
+<div id="system">
 
-	<?php if ($this->params->get('show_page_heading', 1)) : ?>
+	<?php if ($this->params->get('show_page_heading')) : ?>
 	<h1 class="title">
 		<?php if ($this->escape($this->params->get('page_heading'))) :?>
 			<?php echo $this->escape($this->params->get('page_heading')); ?>
@@ -69,4 +72,4 @@ else :
 
 </div>
 
-<?php endif; ?>
+<?php endif;

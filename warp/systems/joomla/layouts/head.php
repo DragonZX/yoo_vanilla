@@ -21,6 +21,11 @@ $this['system']->document->setHeadData($head);
 // load jQuery
 JHtml::_('jquery.framework');
 
+// load bootstrap styles
+if ($bootstrap = $this['path']->url('css:bootstrap.css')) {
+	$this['system']->document->addStyleSheet($bootstrap);
+}
+
 // get styles and scripts
 $styles  = $this['asset']->get('css');
 $scripts = $this['asset']->get('js');

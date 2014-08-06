@@ -13,8 +13,8 @@ defined('_JEXEC') or die;
 
 <div id="system">
 	
-	<?php if ($this->params->get('show_page_heading', 1)) : ?>
-	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
+	<?php if ($this->params->get('show_page_heading')) : ?>
+	<h1 class="page-title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 
 	<?php if($this->params->get('show_category_title', 1)) : ?>
@@ -30,6 +30,11 @@ defined('_JEXEC') or die;
 			<?php echo JHtml::_('content.prepare', $this->category->description, '', 'com_newsfeeds.category'); ?>
 		<?php endif; ?>
 	</div>
+	<?php endif; ?>
+
+	<?php if ($this->params->get('show_tags', 1) && !empty($this->category->tags->itemTags)) : ?>
+		<?php $this->category->tagLayout = new JLayoutFile('joomla.content.tags'); ?>
+		<?php echo $this->category->tagLayout->render($this->category->tags->itemTags); ?>
 	<?php endif; ?>
 
 	<?php echo $this->loadTemplate('items'); ?>

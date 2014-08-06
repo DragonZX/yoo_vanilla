@@ -12,6 +12,7 @@ defined('_JEXEC') or die;
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.formvalidation');
+JHtml::_('formbehavior.chosen', 'select');
 
 // Create shortcut to parameters.
 $params = $this->state->get('params');
@@ -32,11 +33,11 @@ $params = $this->state->get('params');
 
 <div id="system">
 	
-	<?php if ($this->params->get('show_page_heading', 1)) : ?>
+	<?php if ($this->params->get('show_page_heading')) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 	
-	<form class="submission" action="<?php echo JRoute::_('index.php?option=com_weblinks&view=form&w_id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm">
+	<form class="submission box style" action="<?php echo JRoute::_('index.php?option=com_weblinks&view=form&w_id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm">
 		<fieldset>
 			<legend><?php echo JText::_('COM_WEBLINKS_LINK'); ?></legend>
 	
@@ -60,6 +61,11 @@ $params = $this->state->get('params');
 				<?php echo $this->form->getInput('url'); ?>
 			</div>
 			
+			<div>
+				<?php echo $this->form->getLabel('tags', 'metadata'); ?>
+				<?php echo $this->form->getInput('tags', 'metadata'); ?>
+			</div>
+
 			<?php if ($this->user->authorise('core.edit.state', 'com_weblinks.weblink')): ?>
 			<div>
 				<?php echo $this->form->getLabel('state'); ?>
@@ -79,7 +85,7 @@ $params = $this->state->get('params');
 				
 		</fieldset>
 		
-		<div class="submit">
+		<div>
 			<button type="button" onclick="Joomla.submitbutton('weblink.save')"><?php echo JText::_('JSAVE') ?></button>
 			<button type="button" onclick="Joomla.submitbutton('weblink.cancel')"><?php echo JText::_('JCANCEL') ?></button>
 		</div>

@@ -98,23 +98,25 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 					<td><?php echo JHtml::_('date', $article->displayDate, $this->escape($this->params->get('date_format', JText::_('DATE_FORMAT_LC3')))); ?></td>
 					<?php endif; ?>
 					
-					<?php if ($this->params->get('list_show_author', 1) && !empty($article->author )) : ?>
+					<?php if ($this->params->get('list_show_author', 1)) : ?>
 					<td>
 					
 						<?php
-							$author =  $article->author;
-							$author = ($article->created_by_alias ? $article->created_by_alias : $author);
-	
-							if (!empty($article->contactid ) &&  $this->params->get('link_author') == true) {
-								echo JHtml::_('link', JRoute::_('index.php?option=com_contact&view=contact&id='.$article->contactid), $author);
-							} else {
-								echo $author;
+							if (!empty($article->author) || !empty($article->created_by_alias)) {
+								$author =  $article->author;
+								$author = ($article->created_by_alias ? $article->created_by_alias : $author);
+		
+								if (!empty($article->contactid ) &&  $this->params->get('link_author') == true) {
+									echo JHtml::_('link', JRoute::_('index.php?option=com_contact&view=contact&id='.$article->contactid), $author);
+								} else {
+									echo $author;
+								}
 							}
 						?>
 
 					</td>
 					<?php endif; ?>
-					
+
 					<?php if ($this->params->get('list_show_hits', 1)) : ?>
 					<td align="center"><?php echo $article->hits; ?></td>
 					<?php endif; ?>
@@ -130,7 +132,7 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 							$link = JRoute::_('index.php?option=com_users&view=login&Itemid='.$itemId);
 							$returnURL = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug));
 							$fullURL = new JURI($link);
-							$fullURL->setVar('return', base64_encode($returnURL));
+							$fullURL->setVar('return', base64_encode(urlencode($returnURL)));
 						?>
 						<a href="<?php echo $fullURL; ?>"><?php echo JText::_( 'COM_CONTENT_REGISTER_TO_READ_MORE' ); ?></a>
 					</td>
@@ -158,4 +160,4 @@ $listDirn	= $this->escape($this->state->get('list.direction'));
 	<input type="hidden" name="limitstart" value="" />
 
 </form>
-<?php endif; ?>
+<?php endif;

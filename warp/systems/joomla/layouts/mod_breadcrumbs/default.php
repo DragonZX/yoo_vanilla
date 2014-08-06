@@ -27,7 +27,7 @@ defined('_JEXEC') or die;
 		
 		// mark-up last item as strong
 		if ($i < $count-1) {
-			if(!empty($list[$i]->link)) {
+			if (!empty($list[$i]->link)) {
 				echo '<a href="'.$list[$i]->link.'">'.$name.'</a>';
 			} else {
 				echo '<span>'.$name.'</span>';

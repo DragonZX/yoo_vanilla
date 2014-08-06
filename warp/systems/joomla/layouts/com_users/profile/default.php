@@ -7,12 +7,12 @@
 */
 
 // no direct access
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 JHtml::_('behavior.tooltip');
 ?>
 
-<div id="system" class="<?php $this->pageclass_sfx; ?>">
+<div id="system">
 	
 	<?php if ($this->params->get('show_page_heading')) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>

@@ -13,6 +13,7 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.calendar');
 JHtml::_('behavior.formvalidation');
+JHtml::_('formbehavior.chosen', 'select');
 
 // Create shortcut to parameters.
 $params = $this->state->get('params');
@@ -38,13 +39,13 @@ endif;
 	}
 </script>
 
-<div id="system" class="<?php $this->pageclass_sfx; ?>">
+<div id="system">
 
-	<?php if ($this->params->get('show_page_heading', 1)) : ?>
+	<?php if ($params->get('show_page_heading')) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 
-	<form class="submission" action="<?php echo JRoute::_('index.php?option=com_content&a_id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm">
+	<form class="submission box style" action="<?php echo JRoute::_('index.php?option=com_content&a_id='.(int) $this->item->id); ?>" method="post" name="adminForm" id="adminForm">
 		<fieldset>
 			<legend><?php echo JText::_('JEDITOR'); ?></legend>
 	
@@ -63,7 +64,7 @@ endif;
 				<?php echo $this->form->getInput('articletext'); ?>
 	
 		</fieldset>
-	
+		
 		<?php if ($params->get('show_urls_images_frontend')  ): ?>
 		<fieldset>
 			<legend><?php echo JText::_('COM_CONTENT_IMAGES_AND_URLS'); ?></legend>
@@ -154,7 +155,12 @@ endif;
 				<?php echo $this->form->getLabel('catid'); ?>
 				<?php echo $this->form->getInput('catid'); ?>
 			</div>
-			
+
+			<div class="formelm">
+				<?php echo $this->form->getLabel('tags', 'metadata'); ?>
+				<?php echo $this->form->getInput('tags', 'metadata'); ?>
+			</div>
+
 			<div class="formelm">
 				<?php echo $this->form->getLabel('created_by_alias'); ?>
 				<?php echo $this->form->getInput('created_by_alias'); ?>
@@ -228,7 +234,7 @@ endif;
 		<input type="hidden" name="return" value="<?php echo $this->return_page;?>" />
 		<?php if($this->params->get('enable_category', 0) == 1) : ?>
 		<input type="hidden" name="jform[catid]" value="<?php echo $this->params->get('catid', 1);?>" />
-		<?php endif; ?>		
+		<?php endif; ?>
 		<?php echo JHtml::_( 'form.token' ); ?>
 		
 	</form>

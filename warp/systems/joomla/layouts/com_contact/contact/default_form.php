@@ -17,7 +17,7 @@ JHtml::_('behavior.tooltip');
 	<?php echo $this->error; ?>
 <?php endif; ?>
 
-<form class="submission" action="<?php echo JRoute::_('index.php'); ?>" method="post" class="form-validate" id="contact-form">
+<form class="submission box style" action="<?php echo JRoute::_('index.php'); ?>" method="post" id="contact-form">
 	<fieldset>
 		<legend><?php echo JText::_('COM_CONTACT_FORM_LABEL'); ?></legend>
 		

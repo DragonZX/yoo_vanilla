@@ -11,12 +11,11 @@ defined('_JEXEC') or die;
 
 JHtml::addIncludePath(JPATH_COMPONENT.'/helpers');
 
-$pageClass = $this->params->get('pageclass_sfx');
 ?>
 
-<div id="system" class="<?php $this->pageclass_sfx; ?>">
+<div id="system">
 
-	<?php if ($this->params->get('show_page_heading', 1)) : ?>
+	<?php if ($this->params->get('show_page_heading')) : ?>
 	<h1 class="title"><?php echo $this->escape($this->params->get('page_heading')); ?></h1>
 	<?php endif; ?>
 
@@ -31,26 +30,27 @@ $pageClass = $this->params->get('pageclass_sfx');
 	<?php if ($this->params->get('show_description', 1) || $this->params->def('show_description_image', 1)) :?>
 	<div class="description">
 		<?php if ($this->params->get('show_description_image') && $this->category->getParams()->get('image')) : ?>
-			<img src="<?php echo $this->category->getParams()->get('image'); ?>" alt="<?php echo $this->category->getParams()->get('image'); ?>" class="align-right" />
+			<img src="<?php echo $this->category->getParams()->get('image'); ?>" alt="<?php echo $this->category->getParams()->get('image'); ?>" class="size-auto align-right" />
 		<?php endif; ?>
 		<?php if ($this->params->get('show_description') && $this->category->description) echo JHtml::_('content.prepare', $this->category->description, '', 'com_content.category'); ?>
 	</div>
 	<?php endif; ?>
 
+	<?php if ($this->params->get('show_tags', 1) && !empty($this->category->tags->itemTags)) : ?>
+		<?php $this->category->tagLayout = new JLayoutFile('joomla.content.tags'); ?>
+		<?php echo $this->category->tagLayout->render($this->category->tags->itemTags); ?>
+	<?php endif; ?>
+
 	<?php
 	
 	// init vars
-	$leading = '';
 	$articles = '';
 	
 	// leading articles
-	$leading .= '<div class="items leading">';
 	foreach ($this->lead_items as $item) {
 		$this->item = $item;
-		$leading  .= $this->loadTemplate('item');
+		$articles  .= '<div class="grid-box width100 leading">'.$this->loadTemplate('item').'</div>';
 	}
-	$leading .= '</div>';
-	echo $leading;
 	
 	// intro articles
 	$columns = array();
@@ -70,14 +70,12 @@ $pageClass = $this->params->get('pageclass_sfx');
 	// render intro columns
 	if ($count = count($columns)) {
 		for ($i = 0; $i < $count; $i++) {
-			$first = ($i == 0) ? ' first' : null;
-			$last  = ($i == $count - 1) ? ' last' : null;
-			$articles .= '<div class="width'.intval(100 / $count).$first.$last.'">'.$columns[$i].'</div>';
+			$articles .= '<div class="grid-box width'.intval(100 / $count).'">'.$columns[$i].'</div>';
 		}
 	}
 
 	if ($articles) {
-		echo '<div class="items items-col-'.$count.'">'.$articles.'</div>';
+		echo '<div class="items items-col-'.$count.' grid-block">'.$articles.'</div>';
 	}
 	
 	?>

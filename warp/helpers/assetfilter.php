@@ -380,14 +380,14 @@ class WarpAssetFilterCSSImageBase64 implements WarpAssetFilterInterface {
         if (preg_match_all('/url\(\s*[\'"]?([^\'"]+)[\'"]?\s*\)/Ui', $asset->getContent(), $matches)) {
 			foreach ($matches[0] as $i => $url) {
 				if ($path = realpath($asset['base_path'].'/'.ltrim(preg_replace('/'.preg_quote($asset['base_url'], '/').'/', '', $matches[1][$i], 1), '/'))) {
-	                $images[$url] = $path;
+	                $images[$url] = isset($images[$url]) ? false : $path;
 				}
 			}
         }
 
-        // check if image exists and filesize < 10kb
+        // check if image exists and filesize < 5kb
         foreach ($images as $url => $path) {
-            if (filesize($path) <= 10240 && preg_match('/\.(gif|png|jpg)$/i', $path, $extension)) {
+            if ($path && filesize($path) <= 5120 && preg_match('/\.(gif|png|jpg)$/i', $path, $extension)) {
                $content = str_replace($url, sprintf('url(data:image/%s;base64,%s)', str_replace('jpg', 'jpeg', strtolower($extension[1])), base64_encode(file_get_contents($path))), $content);
             }
         }
@@ -624,7 +624,7 @@ class WarpAssetFilterCSSCompressor implements WarpAssetFilterInterface {
 	Class: WarpAssetFilterJSCompressor
 		Javascript compressor, minifies javascript
 		Based on JSMin (https://github.com/mrclay/minify, Ryan Grove <ryan@wonko.com>, Stephen Clay <steve@mrclay.org>, BSD License)
-*/		
+*/
 class WarpAssetFilterJSCompressor implements WarpAssetFilterInterface {
 
     const ORD_LF            = 10;
@@ -670,7 +670,7 @@ class WarpAssetFilterJSCompressor implements WarpAssetFilterInterface {
 		$this->output      = '';
 		$this->lastByteOut = '';
 
-		try { 
+		try {
 			$script = trim($this->min());
 		} catch (Exception $e) {}
 
@@ -701,7 +701,7 @@ class WarpAssetFilterJSCompressor implements WarpAssetFilterInterface {
             // determine next command
             $command = self::ACTION_KEEP_A; // default
             if ($this->a === ' ') {
-                if (($this->lastByteOut === '+' || $this->lastByteOut === '-') 
+                if (($this->lastByteOut === '+' || $this->lastByteOut === '-')
                     && ($this->b === $this->lastByteOut)) {
                     // Don't delete this space. If we do, the addition/subtraction
                     // could be parsed as a post-increment
@@ -720,7 +720,7 @@ class WarpAssetFilterJSCompressor implements WarpAssetFilterInterface {
                 }
             } elseif (! $this->isAlphaNum($this->a)) {
                 if ($this->b === ' '
-                    || ($this->b === "\n" 
+                    || ($this->b === "\n"
                         && (false === strpos('}])+-"\'', $this->a)))) {
                     $command = self::ACTION_DELETE_A_B;
                 }
@@ -744,7 +744,7 @@ class WarpAssetFilterJSCompressor implements WarpAssetFilterInterface {
      * @throws Exception
      */
     protected function action($command) {
-        if ($command === self::ACTION_DELETE_A_B 
+        if ($command === self::ACTION_DELETE_A_B
             && $this->b === ' '
             && ($this->a === '+' || $this->a === '-')) {
             // Note: we're at an addition/substraction operator; the inputIndex
@@ -758,7 +758,7 @@ class WarpAssetFilterJSCompressor implements WarpAssetFilterInterface {
             case self::ACTION_KEEP_A:
                 $this->output .= $this->a;
                 $this->lastByteOut = $this->a;
-                
+
                 // fallthrough
             case self::ACTION_DELETE_A:
                 $this->a = $this->b;
@@ -767,7 +767,7 @@ class WarpAssetFilterJSCompressor implements WarpAssetFilterInterface {
                     while (true) {
                         $this->output .= $this->a;
                         $this->lastByteOut = $this->a;
-                        
+
                         $this->a       = $this->get();
                         if ($this->a === $this->b) { // end quote
                             break;
@@ -781,7 +781,7 @@ class WarpAssetFilterJSCompressor implements WarpAssetFilterInterface {
                         if ($this->a === '\\') {
                             $this->output .= $this->a;
                             $this->lastByteOut = $this->a;
-                            
+
                             $this->a       = $this->get();
                             $str .= $this->a;
                         }

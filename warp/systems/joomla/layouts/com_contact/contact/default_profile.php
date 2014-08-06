@@ -43,4 +43,4 @@ defined('_JEXEC') or die;
 	
 <?php endforeach; ?>
 </ul>
-<?php endif; ?>
+<?php endif;
